@@ -1,16 +1,31 @@
 let gridContainer = document.querySelector("#grid-container");
 
 const SQUARE_SIZE_PX = 32;
-const SQUARES_COUNT = 16*16;
 
-for (let i = 0; i < SQUARES_COUNT; i++) {
-    let square = document.createElement("div");
-    square.classList.add("square");
-    gridContainer.appendChild(square);
+function createGrid(squaresPerSide) {
+    // squaresPerSide should be greater than 0 and less or equal 100
+    squaresPerSide = (squaresPerSide < 1) 
+                     ? 1 : (squaresPerSide > 100) 
+                     ? 100 : squaresPerSide
+
+    let width = SQUARE_SIZE_PX * squaresPerSide;
+    gridContainer.style.width = width + "px";
+
+    let squaresCount = squaresPerSide * squaresPerSide;
+
+    for (let i = 0; i < squaresCount; i++) {
+        let square = document.createElement("div");
+        square.classList.add("square");
+        gridContainer.appendChild(square);
+    }
+    
+    let squares = document.querySelectorAll(".square");
+    
+    squares.forEach(square => square.addEventListener("mouseover", event => {
+        event.target.style.backgroundColor = "gray";
+    }));
+
+    return squares;
 }
 
-let squares = document.querySelectorAll(".square");
-
-squares.forEach(square => square.addEventListener("mouseover", event => {
-    event.target.style.backgroundColor = "gray";
-}));
+let squares = createGrid(16);
