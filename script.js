@@ -8,3 +8,9 @@ for (let i = 0; i < SQUARES_COUNT; i++) {
     square.classList.add("square");
     gridContainer.appendChild(square);
 }
+
+let squares = document.querySelectorAll(".square");
+
+squares.forEach(square => square.addEventListener("mouseover", event => {
+    event.target.style.backgroundColor = "gray";
+}));
