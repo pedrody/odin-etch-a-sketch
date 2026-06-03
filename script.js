@@ -32,4 +32,8 @@ function deleteGrid(squares) {
     squares.forEach(s => s.remove());
 }
 
+function clearGrid(squares) {
+    squares.forEach(s => s.style.backgroundColor = "white");
+}
+
 let squares = createGrid(16);
