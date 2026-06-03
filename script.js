@@ -28,4 +28,8 @@ function createGrid(squaresPerSide) {
     return squares;
 }
 
+function deleteGrid(squares) {
+    squares.forEach(s => s.remove());
+}
+
 let squares = createGrid(16);
