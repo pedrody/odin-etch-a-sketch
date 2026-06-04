@@ -1,6 +1,7 @@
 let gridContainer = document.querySelector("#grid-container");
 let changeSizeBtn = document.querySelector("#change-size");
 let randomColorBtn = document.querySelector("#random-color");
+let shakeBtn = document.querySelector("#shake");
 
 const CONTAINER_GRID_SIZE_PX = 512;
 
@@ -72,3 +73,5 @@ randomColorBtn.addEventListener("click", () => {
         randomColor = false;
     }
 });
+
+shakeBtn.addEventListener("click", () => clearGrid(squares));
