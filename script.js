@@ -1,11 +1,6 @@
-// TODO:
-// the grid should occupy the same space no matter how many squares was inputted;
-// add button to clear the grid (shake);
-// change the way of how the grid width is calculated, should be a fixed width
-// 
-
 let gridContainer = document.querySelector("#grid-container");
 let changeSizeBtn = document.querySelector("#change-size");
+let randomColorBtn = document.querySelector("#random-color");
 
 const CONTAINER_GRID_SIZE_PX = 512;
 
@@ -31,7 +26,11 @@ function createGrid(squaresPerSide) {
     let squares = document.querySelectorAll(".square");
     
     squares.forEach(square => square.addEventListener("mouseover", event => {
-        event.target.style.backgroundColor = "gray";
+        if (randomColor) {
+            event.target.style.backgroundColor = getRandomRgb();
+        } else {
+            event.target.style.backgroundColor = "gray";
+        }
     }));
 
     return squares;
@@ -45,11 +44,31 @@ function clearGrid(squares) {
     squares.forEach(s => s.style.backgroundColor = "white");
 }
 
+function getRandomRgb() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 let squares = createGrid(16);
+
+let randomColor = false;
 
 changeSizeBtn.addEventListener("click", () => {
     var squaresPerSide = +prompt("New grid size (should be greater than 0 and less or equal 100): ");
 
     deleteGrid(squares);
     squares = createGrid(squaresPerSide);
+});
+
+randomColorBtn.addEventListener("click", () => {
+    if (randomColor === false) {
+        randomColorBtn.textContent = "Random Color: ON";
+        randomColor = true;
+    } else {
+        randomColorBtn.textContent = "Random Color: OFF";
+        randomColor = false;
+    }
 });
