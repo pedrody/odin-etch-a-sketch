@@ -30,7 +30,12 @@ function createGrid(squaresPerSide) {
         if (randomColor) {
             event.target.style.backgroundColor = getRandomRgb();
         } else {
-            event.target.style.backgroundColor = "gray";
+            event.target.style.backgroundColor = "black";
+        }
+
+        let opacity = +event.target.style.opacity;
+        if (opacity < 1) {
+            event.target.style.opacity = opacity + 0.1;
         }
     }));
 
@@ -42,7 +47,10 @@ function deleteGrid(squares) {
 }
 
 function clearGrid(squares) {
-    squares.forEach(s => s.style.backgroundColor = "white");
+    squares.forEach(s => { 
+        s.style.backgroundColor = "";
+        s.style.opacity = "";
+    });
 }
 
 function getRandomRgb() {
